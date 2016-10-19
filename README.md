@@ -19,6 +19,9 @@ If you are looking for a more feature rich matplotlib wrapper that makes attract
 
 - [Seaborn](https://github.com/mwaskom/seaborn)
 
+This package was partially inspired by [this blog
+post](http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/)
+
 Dependencies
 ------------
 
