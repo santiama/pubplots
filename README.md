@@ -11,6 +11,10 @@ all matplotlib functionality is retained.
 It also includes a class for holding the plot data. This class has methods for loading data from csv files,
 or preparing pandas DataFrames for plotting. 
 
+- [Examples](https://bulfinb.github.io/pubplots/pubplots#examples) are given in the documentation
+
+- [Documentation](https://bulfinb.github.io/pubplots/pubplots)
+
 If you are looking for a more feature rich matplotlib wrapper that makes attractive plots, check out 
 
 - [Seaborn](https://github.com/mwaskom/seaborn)
