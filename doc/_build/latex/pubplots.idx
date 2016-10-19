@@ -1,0 +1,32 @@
+\indexentry{PlotData (class in pubplots.plotdata)|hyperpage}{3}
+\indexentry{filelist() (pubplots.plotdata.PlotData method)|hyperpage}{3}
+\indexentry{fit() (pubplots.plotdata.PlotData method)|hyperpage}{4}
+\indexentry{onefile() (pubplots.plotdata.PlotData method)|hyperpage}{4}
+\indexentry{prepare\_frame() (pubplots.plotdata.PlotData method)|hyperpage}{4}
+\indexentry{smooth() (pubplots.plotdata.PlotData method)|hyperpage}{5}
+\indexentry{walkandfind() (pubplots.plotdata.PlotData method)|hyperpage}{5}
+\indexentry{pubplots.plot (module)|hyperpage}{6}
+\indexentry{add\_yerrors() (in module pubplots.plot)|hyperpage}{6}
+\indexentry{axis\_labels() (in module pubplots.plot)|hyperpage}{6}
+\indexentry{inset\_plot() (in module pubplots.plot)|hyperpage}{6}
+\indexentry{label\_line() (in module pubplots.plot)|hyperpage}{7}
+\indexentry{label\_lines() (in module pubplots.plot)|hyperpage}{8}
+\indexentry{modern\_style() (in module pubplots.plot)|hyperpage}{8}
+\indexentry{old\_hat\_style() (in module pubplots.plot)|hyperpage}{8}
+\indexentry{plot\_lines() (in module pubplots.plot)|hyperpage}{8}
+\indexentry{plot\_lright() (in module pubplots.plot)|hyperpage}{9}
+\indexentry{plot\_lright2() (in module pubplots.plot)|hyperpage}{10}
+\indexentry{plot\_scatter() (in module pubplots.plot)|hyperpage}{10}
+\indexentry{plot\_sright() (in module pubplots.plot)|hyperpage}{11}
+\indexentry{plot\_sright2() (in module pubplots.plot)|hyperpage}{11}
+\indexentry{quick\_modern() (in module pubplots.plot)|hyperpage}{12}
+\indexentry{quick\_old\_hat() (in module pubplots.plot)|hyperpage}{12}
+\indexentry{quick\_semimodern() (in module pubplots.plot)|hyperpage}{13}
+\indexentry{remove\_boundary() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{remove\_right\_top() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{save() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{semi\_modern\_style() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{set\_colors() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{set\_linestyles() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{set\_markers() (in module pubplots.plot)|hyperpage}{14}
+\indexentry{pubplots.colorsmarkers (module)|hyperpage}{15}

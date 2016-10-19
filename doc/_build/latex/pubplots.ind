@@ -1,0 +1,68 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter A
+  \item add\_yerrors() (in module pubplots.plot), \hyperpage{6}
+  \item axis\_labels() (in module pubplots.plot), \hyperpage{6}
+
+  \indexspace
+  \bigletter F
+  \item filelist() (pubplots.plotdata.PlotData method), \hyperpage{3}
+  \item fit() (pubplots.plotdata.PlotData method), \hyperpage{4}
+
+  \indexspace
+  \bigletter I
+  \item inset\_plot() (in module pubplots.plot), \hyperpage{6}
+
+  \indexspace
+  \bigletter L
+  \item label\_line() (in module pubplots.plot), \hyperpage{7}
+  \item label\_lines() (in module pubplots.plot), \hyperpage{8}
+
+  \indexspace
+  \bigletter M
+  \item modern\_style() (in module pubplots.plot), \hyperpage{8}
+
+  \indexspace
+  \bigletter O
+  \item old\_hat\_style() (in module pubplots.plot), \hyperpage{8}
+  \item onefile() (pubplots.plotdata.PlotData method), \hyperpage{4}
+
+  \indexspace
+  \bigletter P
+  \item plot\_lines() (in module pubplots.plot), \hyperpage{8}
+  \item plot\_lright() (in module pubplots.plot), \hyperpage{9}
+  \item plot\_lright2() (in module pubplots.plot), \hyperpage{10}
+  \item plot\_scatter() (in module pubplots.plot), \hyperpage{10}
+  \item plot\_sright() (in module pubplots.plot), \hyperpage{11}
+  \item plot\_sright2() (in module pubplots.plot), \hyperpage{11}
+  \item PlotData (class in pubplots.plotdata), \hyperpage{3}
+  \item prepare\_frame() (pubplots.plotdata.PlotData method), \hyperpage{4}
+  \item pubplots.colorsmarkers (module), \hyperpage{15}
+  \item pubplots.plot (module), \hyperpage{6}
+
+  \indexspace
+  \bigletter Q
+  \item quick\_modern() (in module pubplots.plot), \hyperpage{12}
+  \item quick\_old\_hat() (in module pubplots.plot), \hyperpage{12}
+  \item quick\_semimodern() (in module pubplots.plot), \hyperpage{13}
+
+  \indexspace
+  \bigletter R
+  \item remove\_boundary() (in module pubplots.plot), \hyperpage{14}
+  \item remove\_right\_top() (in module pubplots.plot), \hyperpage{14}
+
+  \indexspace
+  \bigletter S
+  \item save() (in module pubplots.plot), \hyperpage{14}
+  \item semi\_modern\_style() (in module pubplots.plot), \hyperpage{14}
+  \item set\_colors() (in module pubplots.plot), \hyperpage{14}
+  \item set\_linestyles() (in module pubplots.plot), \hyperpage{14}
+  \item set\_markers() (in module pubplots.plot), \hyperpage{14}
+  \item smooth() (pubplots.plotdata.PlotData method), \hyperpage{5}
+
+  \indexspace
+  \bigletter W
+  \item walkandfind() (pubplots.plotdata.PlotData method), \hyperpage{5}
+
+\end{theindex}
