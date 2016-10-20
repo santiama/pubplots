@@ -152,6 +152,7 @@ def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10', *
     **kwargs : TYPE
         passed to matplotlib axes.plot()
     """
+    lines=[]
     if dashes is True:
         dashes=pubdashes
     colors=set_colors(colors)
@@ -159,9 +160,10 @@ def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10', *
         # PLot the dataa
         a, = ax.plot(data[0], data[1], ls=linestyles[i%len(linestyles)],
                      color=colors[i%len(colors)], lw=lw, **kwargs)
+        lines.append(a)
         if dashes and i>0:
             a.set_dashes(dashes[i%len(dashes)])
-        i=i+1
+    return lines
 
 
 def plot_scatter(ax, yset, markersize=10, fillstyle='full',
@@ -185,11 +187,14 @@ def plot_scatter(ax, yset, markersize=10, fillstyle='full',
 
     """
     colors=set_colors(colors)
-    for data, marker, color in zip(yset, markers, colors):
+    scatters=[]
+    for i, data, enumerate(yset):
         # PLot the data
-        ax.plot(data[0], data[1], linestyle='none', marker=marker,
-            fillstyle=fillstyle, color=color, markersize=markersize,
+        a,=ax.plot(data[0], data[1], linestyle='none', marker=markers[i%len(markers)],
+            fillstyle=fillstyle, color=colors[i%len(colors)], markersize=markersize,
             markeredgewidth=markeredgewidth)
+        scatters.append(a)
+    return scatters
 
 
 def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles=['-'],
@@ -237,8 +242,8 @@ def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles=['-'],
     for tl in axr.get_yticklabels():
         # Color the tick labels
         tl.set_color(color)
-    axr.set_ylabel(yaxlabel, color=color, fontsize=20)
-    axr.tick_params(axis='both', which='major', labelsize=fontsize, width=2.5,color=color)
+    axr.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
+    axr.tick_params(axis='both', which='major', labelsize=fontsize-2, width=2.5,color=color)
     return axr
 
 
@@ -286,8 +291,8 @@ def plot_lright2(ax, yset, lw=2.0, yaxlabel='None', color=TB10[3],
     for tl in axr2.get_yticklabels():
         # Color the tick labels
         tl.set_color(color)
-    axr2.set_ylabel(yaxlabel, color=color, fontsize=20)
-    axr2.tick_params(axis='both', which='major', labelsize=fontsize, width=2.5, color=color)
+    axr2.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
+    axr2.tick_params(axis='both', which='major', labelsize=fontsize-2, width=2.5, color=color)
     return axr2
 
 
@@ -337,7 +342,7 @@ def plot_sright(ax, yset, markersize=8, fillstyle='full', markers=pubmarkers, ya
         # PLot the data
         axr.plot(data[0], data[1], linestyle='None', fillstyle=fillstyle, marker=marker,
                  color=color, markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
-    axr.set_ylabel(yaxlabel, color=color, fontsize=24)
+    axr.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
     for tl in axr.get_yticklabels():
         tl.set_color(color)
     axr.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
