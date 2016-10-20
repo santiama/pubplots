@@ -10,7 +10,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Rectangle
-from pubplots.colorsmarkers import pubcolors, pubmarkers, publs, pubdashes, TB10
+from pubplots.colorsmarkers import pubcolors, pubmarkers, pubdashes, TB10
 
 
 def set_colors(colors):
@@ -35,60 +35,6 @@ def set_colors(colors):
     except TypeError:
         if type(colors).__name__ == 'list':
             return colors
-        else:
-            raise
-
-
-def set_linestyles(linestyles):
-    """return a list of linestyles or unchanged list if a list is passed
-
-    Parameters
-    ----------
-    linestyles : str or list
-        options '-' or '--', '..' or, '.-' or a list with variations of these
-
-    Returns
-    -------
-    list
-        passed list or makes a list from '-'
-    """
-    try:
-        return publs[linestyles]
-    except KeyError:
-        print('Not a valid linestyle key, options: ', publs.keys())
-        print('Using default - instead')
-        return publs['-']
-    except TypeError:
-        if type(linestyles).__name__ == 'list':
-            return linestyles
-        else:
-            raise
-
-
-def set_markers(markers):
-    """return a list of markers if a str key is passed
-
-    Parameters
-    ----------
-    markers : str or list
-        'var' gives a list of varying markers
-
-    Returns
-    -------
-    list
-        list of markers
-
-    """
-    try:
-        return pubmarkers[markers]
-    except KeyError:
-        print('Not a valid markers key, options: ', pubmarkers.keys())
-        print('Using default var instead')
-        return pubmarkers['var']
-    except TypeError:
-        if type(markers).__name__ == 'list':
-            return markers
-            pass
         else:
             raise
 
@@ -137,7 +83,7 @@ def remove_right_top(ax):
     ax.spines["right"].set_visible(False)
 
 
-def modern_style(ax, fontsize=18, grid=True):
+def modern_style(ax, fontsize=16, grid=True):
     """modern style. No boundary and y-grid. ticks on left and bottom
 
     Parameters
@@ -153,7 +99,7 @@ def modern_style(ax, fontsize=18, grid=True):
         ax.grid(grid, linestyle='--', axis='y', color='0.60')
 
 
-def semi_modern_style(ax, fontsize=18, grid=True):
+def semi_modern_style(ax, fontsize=16, grid=True):
     """Bottom and left boundarys. y-grid nicetableau colors
 
     Parameters
@@ -170,7 +116,7 @@ def semi_modern_style(ax, fontsize=18, grid=True):
         ax.grid(grid, linestyle='--', axis='y', color='0.60')
 
 
-def old_hat_style(ax, fontsize=18):
+def old_hat_style(ax, fontsize=16):
     """Typical graph style. Bounding box. Black lines
 
     Parameters
@@ -183,7 +129,7 @@ def old_hat_style(ax, fontsize=18):
                    labelsize=fontsize, labelleft="on", width=2)
 
 
-def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles='-', colors='tb10', **kwargs):
+def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10', **kwargs):
     """plot passed data as lines. Note it uses a ziped set  of lists so the shortest
     list is the maximum number of plots. TB10 just has 10 colors so it will plot a maximum of 10
     lines. For more use 'tb20'
@@ -209,18 +155,17 @@ def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles='-', colors='tb10', **k
     if dashes is True:
         dashes=pubdashes
     colors=set_colors(colors)
-    linestyles=set_linestyles(linestyles)
-    i=0
-    for data, ls, color in zip(yset, linestyles, colors):
+    for i, data, in enumerate(yset):
         # PLot the dataa
-        a, = ax.plot(data[0], data[1], ls, color=color, lw=lw, **kwargs)
+        a, = ax.plot(data[0], data[1], ls=linestyles[i%len(linestyles)],
+                     color=colors[i%len(colors)], lw=lw, **kwargs)
         if dashes and i>0:
-            a.set_dashes(dashes[i])
+            a.set_dashes(dashes[i%len(dashes)])
         i=i+1
 
 
 def plot_scatter(ax, yset, markersize=10, fillstyle='full',
-                 markers='var', markeredgewidth=0.0, colors='tb10'):
+                 markers=pubmarkers, markeredgewidth=0.0, colors='tb10'):
     """plot passed data as a scatter plot. Note it uses a ziped set of lists so the shortest
     list is the maximum number of plots. For example colors is currently of length ten.
 
@@ -240,7 +185,6 @@ def plot_scatter(ax, yset, markersize=10, fillstyle='full',
 
     """
     colors=set_colors(colors)
-    markers=set_markers(markers)
     for data, marker, color in zip(yset, markers, colors):
         # PLot the data
         ax.plot(data[0], data[1], linestyle='none', marker=marker,
@@ -248,7 +192,7 @@ def plot_scatter(ax, yset, markersize=10, fillstyle='full',
             markeredgewidth=markeredgewidth)
 
 
-def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles='-',
+def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles=['-'],
                 color=TB10[0], fontsize=18, spine=False, **kwargs):
     """plot line to right hand axis. Also colors the right hand labels to of the line and returns
     The right hand axis. By default it is the tableau blue color
@@ -280,7 +224,6 @@ def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles='-',
     """
     ax.set_zorder(1)
     ax.patch.set_visible(False)
-    linestyles=set_linestyles(linestyles)
     axr = ax.twinx()
     axr.set_frame_on(True)
     axr.spines["right"].set_edgecolor(color)
@@ -289,9 +232,8 @@ def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles='-',
     axr.spines["bottom"].set_visible(False)
     axr.spines["right"].set_visible(spine)
     axr.spines["left"].set_visible(False)
-    for data, ls in zip(yset, linestyles):
-        # PLot the data
-        axr.plot(data[0], data[1], ls, color=color, lw=lw, **kwargs)
+    #Plot the data
+    plot_lines(axr, yset=yset, linestyles=linestyles, lw=lw, colors=[color], **kwargs)
     for tl in axr.get_yticklabels():
         # Color the tick labels
         tl.set_color(color)
@@ -301,7 +243,7 @@ def plot_lright(ax, yset, lw=2.0, yaxlabel='y2', linestyles='-',
 
 
 def plot_lright2(ax, yset, lw=2.0, yaxlabel='None', color=TB10[3],
-                 fontsize=18, linestyles='-', spine=False,**kwargs):
+                 fontsize=18, linestyles=['-'], spine=False,**kwargs):
     """plot line to displaced right hand axis and returns the axis.
     Also colors the right hand labels to that if the
     line. By default it is the tableau red color
@@ -330,7 +272,6 @@ def plot_lright2(ax, yset, lw=2.0, yaxlabel='None', color=TB10[3],
     matplotlib.axes object
         returns the new right hand axes
     """
-    linestyles=set_linestyles(linestyles)
     axr2 = ax.twinx()
     axr2.set_frame_on(True)
     axr2.patch.set_visible(False)
@@ -340,9 +281,8 @@ def plot_lright2(ax, yset, lw=2.0, yaxlabel='None', color=TB10[3],
     axr2.spines["right"].set_visible(spine)
     axr2.spines["left"].set_visible(False)
     axr2.spines["right"].set_position(("outward", 100))
-    for data, ls in zip(yset, linestyles):
-        # PLot the data
-        axr2.plot(data[0], data[1], ls, color=color, lw=lw, **kwargs)
+    #Plot the data
+    plot_lines(axr2, yset=yset, linestyles=linestyles, lw=lw, colors=[color], **kwargs)
     for tl in axr2.get_yticklabels():
         # Color the tick labels
         tl.set_color(color)
@@ -351,7 +291,7 @@ def plot_lright2(ax, yset, lw=2.0, yaxlabel='None', color=TB10[3],
     return axr2
 
 
-def plot_sright(ax, yset, markersize=8, fillstyle='full', markers='var', yaxlabel='y2',
+def plot_sright(ax, yset, markersize=8, fillstyle='full', markers=pubmarkers, yaxlabel='y2',
                 color=TB10[0], fontsize=18, markeredgewidth=0.0, spine=False,
                 **kwargs):
     """plot scatter to right hand axis. Also colors the right hand labels to that if the line. By
@@ -408,7 +348,7 @@ def plot_sright(ax, yset, markersize=8, fillstyle='full', markers='var', yaxlabe
     return axr
 
 
-def plot_sright2(ax , yset, markersize=8, fillstyle='full', markers='var', yaxlabel='y3',
+def plot_sright2(ax , yset, markersize=8, fillstyle='full', markers=pubmarkers, yaxlabel='y3',
                  color=TB10[3], fontsize=18, markeredgewidth=0.0, spine=False,
                  **kwargs):
     """plot scatter to right hand axis. Also colors the right hand labels to that if the line. By
@@ -466,7 +406,7 @@ def plot_sright2(ax , yset, markersize=8, fillstyle='full', markers='var', yaxla
 
 def inset_plot(fig, ax, yset, lbwh=[0.58,0.58,0.40,0.40], grid=False, dashes=None,
                xlabel=None, ylabel=None, title=None, fontsize=14, colors='tb10', style='modern',
-               scatter=False, label=False, labels=[], at_x=None, linestyles='-', markers='var',
+               scatter=False, label=False, labels=[], at_x=None, linestyles='-', markers=pubmarkers,
                **kwargs):
     """Make an inset plot positioned in the top right
 
@@ -569,7 +509,7 @@ def add_yerrors(ax, yset=None, errors=None, colors='tb10', elinewidth=1.5):
 
 def label_lines(ax, yset, at_x=None,
                 rotation_on=False,
-                labels=[], offsets=[(0, 0)]*10, colors='tb10', fontsize=18):
+                labels=[], offsets=[(0, 0)]*20, colors='tb10', fontsize=18):
     """Add in graph labels, which are often much better than having a legend. Uses np.interpolate
     together with the yset's to place the label
 
@@ -635,7 +575,7 @@ def quick_modern(ax, plotdata, scatter=False, rscatter=False, grid=True,
     r1,r2 : matplotlib.axes objects
         returns the new right hand axes, None, None if nothing is plotted to the right hand axes
     """
-    modern_style(ax, fontsize=fontsize, grid=grid)
+    modern_style(ax, fontsize=fontsize-2, grid=grid)
     axis_labels(ax, plotdata.xaxislabel, plotdata.yaxislabel, fontsize=fontsize+int(fontsize/9))
     r1 = None
     r2 = None
