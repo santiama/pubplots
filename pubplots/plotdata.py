@@ -48,7 +48,7 @@ class PlotData(object):
         self.yraxislabel = None
         self.yr2axislabel = None
 
-    def prepare_frame(self, dataframe, xcol=0,
+    def prepare_frame(self, dataframe, sort=True, xcol=0,
             ycols=[1], labels=[],
             yrcols=[], yrlabels=[],
             yr2cols=[], yr2labels=[],
@@ -62,6 +62,8 @@ class PlotData(object):
         dataframe : pandas.DataFrame object to set the plotting data from
         xcol : int, optional
             position of the xdata collumn
+        sort : bool, optional
+            sort the DataFrame to make the xcol ascending
         ycols : list of integers, optional
             list of collumns to use for ydata
         labels : list, optional
@@ -83,6 +85,8 @@ class PlotData(object):
         yr2axislabel : str, optional
             Description
         """
+        if sort:
+            dataframe.sort_values(by=dataframe.iloc[:,xcol].name, inplace=True)
         self.frames.append(dataframe)
         # make pointers to the data in the yset, yrset lists
         for ycol in ycols:
