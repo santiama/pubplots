@@ -52,7 +52,6 @@ GREY = [(0.34, 0.34, 0.39)]*20
 CB10 = [(0, 107, 164), (255, 128, 14), (171, 171, 171), (89, 89, 89), (95, 158, 209),
         (200, 82, 0), (137, 137, 137), (162, 200, 236), (255, 188, 121), (207, 207, 207)]
 
-PBMK = ['o', 's', 'v', 'p', '^', '8', '*', '>', '<', 'x', '+']
 
 # Scale the RGB values to the [0, 1] range, which is the format matplotlib accepts.
 for i in range(len(TB20)):
@@ -70,8 +69,7 @@ for i in range(len(TB5)):
     TB5[i] = (r / 255., g / 255., b / 255.)
 
 pubcolors={'tb10':TB10, 'tb20': TB20, 'tb5':TB5, 'cb10':CB10, 'black':BLACK, 'grey':GREY}
-pubmarkers={'var':PBMK,'o':20*['o'], 's':20*['s'], 'v': 20*['v']}
-publs={'-':20*['-'], '--':20*['--']}
 pubdashes = [[18,4], [14,4,8,4], [18,14], [20,4,6,4], [28,8], [18,4,12,4], [10,6], [16,4,14,6]]
+pubmarkers = ['o', 's', 'v', 'p', '^', '8', '*', '>', '<', 'x', '+']
 for i, entry in enumerate(pubdashes):
     pubdashes[i]=[2*num for num in entry]
