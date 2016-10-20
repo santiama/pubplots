@@ -116,18 +116,18 @@ class PlotData(object):
         if labels != []:
             self.labels+=labels
         else:
-            for data in self.yset:
-                self.labels.append(data[1].name)
+            for ycol in ycols:
+                self.labels.append(self.frames[-1].iloc[:, ycol].name)
         if yrlabels != []:
             self.yrlabels+=yrlabels
         else:
-            for data in self.yrset:
-                self.yrlabels.append(data[1].name)
+            for ycol in yrcols:
+                self.yrlabels.append(self.frames[-1].iloc[:, ycol].name)
         if yr2labels != []:
             self.yr2labels+=yr2labels
         else:
-            for data in self.yr2set:
-                self.yr2labels.append(data[1].name)
+            for ycol in yr2cols:
+                self.yr2labels.append(self.frames[-1].iloc[:, ycol].name)
 
     def onefile(self, filename, header=0, xcol=0,
             ycols=[1], labels=[],
@@ -210,7 +210,6 @@ class PlotData(object):
             aditional arguements passed to pandas.read_csv method
         """
         for root, dirs, files in os.walk(startpath):
-            datas = {}
             load = []
             # make list of files matching the search
             for filename in files:

@@ -607,7 +607,7 @@ def label_lines(ax, yset, at_x=None,
                        rotation_on=rotation_on, fontsize=fontsize, offset=offset)
 
 
-def quick_modern(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False, grid=True,
+def quick_modern(ax, plotdata, scatter=False, rscatter=False, grid=True,
                   r2scatter=False, at_x=None, label=True, fontsize=18):
     """Make a modern style plot from a PlotData object
 
@@ -616,8 +616,6 @@ def quick_modern(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False, gr
     ax : matplotlib.axes object
     plotdata : PlotData object see plotdata from pubplots.
         Holds the information of what data to plot and axislabels line labels etc.
-    figsize : tuple, optional
-        (9,6) is the default
     scatter : bool, optional
         True use markers instead of lines
     rscatter : bool, optional
@@ -701,7 +699,7 @@ def quick_modern(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False, gr
     return r1, r2
 
 
-def quick_semimodern(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False, grid=True,
+def quick_semimodern(ax, plotdata, scatter=False, rscatter=False, grid=True,
                   r2scatter=False, at_x=None, label=True, fontsize=18):
     """Make a modern style plot from a PlotData object
 
@@ -710,8 +708,6 @@ def quick_semimodern(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False
     ax : matplotlib.axes object
     plotdata : PlotData object see plotdata from pubplots.
         Holds the information of what data to plot and axislabels line labels etc.
-    figsize : tuple, optional
-        (9,6) is the default
     scatter : bool, optional
         True use markers instead of lines
     rscatter : bool, optional
@@ -793,7 +789,7 @@ def quick_semimodern(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False
     return r1, r2
 
 
-def quick_old_hat(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False,
+def quick_old_hat(ax, plotdata, scatter=False, rscatter=False,
                   r2scatter=False, at_x=None, label=True, fontsize=18, dashes=False):
     """Make a modern style plot from a PlotData object
 
@@ -802,8 +798,6 @@ def quick_old_hat(ax, plotdata, figsize=(9, 6), scatter=False, rscatter=False,
     ax : matplotlib.axes object
     plotdata : PlotData object see plotdata from pubplots.
         Holds the information of what data to plot and axislabels line labels etc.
-    figsize : tuple, optional
-        (9,6) is the default
     scatter : bool, optional
         True use markers instead of lines
     rscatter : bool, optional
