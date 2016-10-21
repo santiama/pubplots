@@ -1,9 +1,8 @@
-"""A set of scripts for producing nice plots using matplotlib,
+"""A set of scripts for quickly producing nice plots using matplotlib,
 Made to be used in combination with the class PlotData, which contains methods
 for selecting the data from csv files and assiging axes labels and data labels.
 
-Note this is not a wrapper to replace matplolib, it is just a set of scripts
-which take matplotlib axes objects and make nicer plots than the default matplotlib ones.
+Note this is not a wrapper to replace matplolib.
 """
 import os
 import math
@@ -58,31 +57,6 @@ def axis_labels(ax,  xaxislabel='x', yaxislabel='y', title=None, fontsize=20):
         ax.set_title(title, fontsize=fontsize, loc='left', y=1.08)
 
 
-def remove_boundary(ax):
-    """Remove the spines. Common in modern presentation graphs
-
-    Parameters
-    ----------
-    ax : matplotlib.axes object
-        the axes to to have the spines remoced
-    """
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_visible(False)
-
-
-def remove_right_top(ax):
-    """Remove top and right boundaries
-
-    Parameters
-    ----------
-    ax : matplotlib.axes object
-        the axes to to have the spines remoced
-    """
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-
 def modern_style(ax, fontsize=16, grid=True, **kwargs):
     """modern style. No boundary and y-grid. ticks on left and bottom
 
@@ -92,6 +66,9 @@ def modern_style(ax, fontsize=16, grid=True, **kwargs):
     fontsize : int, optional
     grid : bool, optional
     """
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_visible(False)
     remove_boundary(ax)
     ax.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
                    left="on", right="off", labelleft="on", labelsize=fontsize, width=2.5, **kwargs)
@@ -108,7 +85,8 @@ def semi_modern_style(ax, fontsize=16, grid=True):
     fontsize : int, optional
     grid : bool, optional
     """
-    remove_right_top(ax)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
     ax.tick_params(axis="both", which="both", bottom="on", top="off",
                    labelbottom="on", left="on", right="off", labelleft="on",
                    labelsize=fontsize, width=2)
@@ -116,17 +94,20 @@ def semi_modern_style(ax, fontsize=16, grid=True):
         ax.grid(grid, linestyle='--', axis='y', color='0.60')
 
 
-def old_hat_style(ax, fontsize=16):
+def old_hat_style(ax, fontsize=16, grid=False):
     """Typical graph style. Bounding box. Black lines
 
     Parameters
     ----------
     ax : matplotlib.axes object
     fontsize : int, optional
+    grid: bool, default is False
     """
     ax.tick_params(axis="both", which="both", bottom="on", top="off",
                    labelbottom="on", left="on", right="off",
                    labelsize=fontsize, labelleft="on", width=2)
+    if grid:
+        ax.grid(grid, linestyle='--', axis='y', color='0.60')
 
 
 def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10',
@@ -812,7 +793,6 @@ def save(name='plot'):
         os.makedirs("plots")
     plt.savefig(os.path.join('plots', name + '.png'), dpi=150, bbox_inches='tight')
     plt.savefig(os.path.join('plots', name + '.pdf'), dpi=150, bbox_inches='tight')
-    plt.tight_layout()
 
 
 def label_line(ax, x, y, label_text, color,
