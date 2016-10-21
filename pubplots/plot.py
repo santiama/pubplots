@@ -94,7 +94,7 @@ def modern_style(ax, fontsize=16, grid=True):
     """
     remove_boundary(ax)
     ax.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
-                   left="on", right="off", labelleft="on", labelsize=18, width=2.5)
+                   left="on", right="off", labelleft="on", labelsize=fontsize, width=2.5)
     if grid:
         ax.grid(grid, linestyle='--', axis='y', color='0.60')
 
@@ -129,7 +129,8 @@ def old_hat_style(ax, fontsize=16):
                    labelsize=fontsize, labelleft="on", width=2)
 
 
-def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10', **kwargs):
+def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10',
+               labels=['none'],**kwargs):
     """plot passed data as lines. Note it uses a ziped set  of lists so the shortest
     list is the maximum number of plots. TB10 just has 10 colors so it will plot a maximum of 10
     lines. For more use 'tb20'
@@ -159,15 +160,15 @@ def plot_lines(ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10', *
     for i, data, in enumerate(yset):
         # PLot the dataa
         a, = ax.plot(data[0], data[1], ls=linestyles[i%len(linestyles)],
-                     color=colors[i%len(colors)], lw=lw, **kwargs)
+                     color=colors[i%len(colors)], label=labels[i%len(labels)], lw=lw, **kwargs)
         lines.append(a)
         if dashes and i>0:
             a.set_dashes(dashes[i%len(dashes)])
     return lines
 
 
-def plot_scatter(ax, yset, markersize=10, fillstyle='full',
-                 markers=pubmarkers, markeredgewidth=0.0, colors='tb10'):
+def plot_scatter(ax, yset,  markersize=10, fillstyle='full',
+                 markers=pubmarkers, markeredgewidth=0.0, labels=['none'], colors='tb10'):
     """plot passed data as a scatter plot. Note it uses a ziped set of lists so the shortest
     list is the maximum number of plots. For example colors is currently of length ten.
 
@@ -188,7 +189,7 @@ def plot_scatter(ax, yset, markersize=10, fillstyle='full',
     """
     colors=set_colors(colors)
     scatters=[]
-    for i, data, enumerate(yset):
+    for i, data in enumerate(yset):
         # PLot the data
         a,=ax.plot(data[0], data[1], linestyle='none', marker=markers[i%len(markers)],
             fillstyle=fillstyle, color=colors[i%len(colors)], markersize=markersize,
@@ -338,18 +339,14 @@ def plot_sright(ax, yset, markersize=8, fillstyle='full', markers=pubmarkers, ya
     axr.spines["bottom"].set_visible(False)
     axr.spines["right"].set_visible(spine)
     axr.spines["left"].set_visible(False)
-    for data, marker in zip(yset, markers):
-        # PLot the data
-        axr.plot(data[0], data[1], linestyle='None', fillstyle=fillstyle, marker=marker,
-                 color=color, markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
+    plot_scatter(axr, yset, linestyle='None', fillstyle=fillstyle, marker=markers,
+                 colors=[color], markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
     axr.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
     for tl in axr.get_yticklabels():
         tl.set_color(color)
     axr.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
                     left="off", right="off", labelleft="off", width=2,
-                    labelsize=fontsize, color=color)
-    ax.tick_params(axis="both", which="both", bottom="on", top="off",
-                   labelbottom="on", left="off", right="off", labelleft="on", width=2)
+                    labelsize=fontsize-2, color=color)
     return axr
 
 
@@ -394,18 +391,15 @@ def plot_sright2(ax , yset, markersize=8, fillstyle='full', markers=pubmarkers, 
     axr2.spines["right"].set_visible(spine)
     axr2.spines["left"].set_visible(False)
     axr2.spines["right"].set_position(("outward", 100))
-    for data, marker in zip(yset, markers):
-        # PLot the data
-        axr2.plot(data[0], data[1], linestyle='None', fillstyle=fillstyle, marker=marker,
-                  color=color, markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
-    axr2.set_ylabel(yaxlabel, color=color, fontsize=24)
+    #Plot the data
+    plot_scatter(axr2, yset, linestyle='None', fillstyle=fillstyle, marker=markers,
+                 colors=[color], markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
+    axr2.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
     for tl in axr.get_yticklabels():
         tl.set_color(color)
     axr2.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
                      left="off", right="off", labelleft="off", width=2,
-                     labelsize=fontsize, color=color)
-    ax.tick_params(axis="both", which="both", bottom="on", top="off",
-                   labelbottom="on", left="off", right="off", labelleft="on", width=2)
+                     labelsize=fontsize-2, color=color)
     return axr2
 
 
@@ -514,7 +508,7 @@ def add_yerrors(ax, yset=None, errors=None, colors='tb10', elinewidth=1.5):
 
 def label_lines(ax, yset, at_x=None,
                 rotation_on=False,
-                labels=[], offsets=[(0, 0)]*20, colors='tb10', fontsize=18):
+                labels=[], offsets=[(0, 0)], colors='tb10', fontsize=18):
     """Add in graph labels, which are often much better than having a legend. Uses np.interpolate
     together with the yset's to place the label
 
@@ -541,15 +535,15 @@ def label_lines(ax, yset, at_x=None,
         at_x = []
         for i, data in enumerate(yset):
             at_x.append(data[0].min()+(i+1)*(data[0].max()-data[0].min())/(len(yset)+1))
-        for data, x, color, label, offset in zip(yset, at_x, colors, labels, offsets):
-            label_line(ax, data[0], data[1], label, color,
-                       at_x=x,
-                       rotation_on=rotation_on, fontsize=fontsize, offset=offset)
+        for i, data in enumerate(yset):
+            label_line(ax, data[0], data[1], labels[i%len(labels)], colors[i%len(colors)],
+                       at_x=at_x[i%len(at_x)],
+                       rotation_on=rotation_on, fontsize=fontsize, offset=offsets[i%len(offsets)])
     else:
-        for data, x, color, label, offset in zip(yset, at_x, colors, labels, offsets):
-            label_line(ax, data[0], data[1], label, color,
-                       at_x=x,
-                       rotation_on=rotation_on, fontsize=fontsize, offset=offset)
+        for i, data in enumerate(yset):
+            label_line(ax, data[0], data[1], labels[i%len(labels)], colors[i%len(colors)],
+                       at_x=at_x[i%len(at_x)],
+                       rotation_on=rotation_on, fontsize=fontsize, offset=offsets[i%len(offsets)])
 
 
 def quick_modern(ax, plotdata, scatter=False, rscatter=False, grid=True,
@@ -581,7 +575,7 @@ def quick_modern(ax, plotdata, scatter=False, rscatter=False, grid=True,
         returns the new right hand axes, None, None if nothing is plotted to the right hand axes
     """
     modern_style(ax, fontsize=fontsize-2, grid=grid)
-    axis_labels(ax, plotdata.xaxislabel, plotdata.yaxislabel, fontsize=fontsize+int(fontsize/9))
+    axis_labels(ax, plotdata.xaxislabel, plotdata.yaxislabel, fontsize=fontsize)
     r1 = None
     r2 = None
     if plotdata.yr2set==[] and 1<len(plotdata.yset)<6:
@@ -672,8 +666,8 @@ def quick_semimodern(ax, plotdata, scatter=False, rscatter=False, grid=True,
     r1,r2 : matplotlib.axes objects
         returns the new right hand axes, None, None if nothing is plotted to the right hand axes
     """
-    axis_labels(ax, plotdata.xaxislabel, plotdata.yaxislabel, fontsize=fontsize+int(fontsize/9))
-    semi_modern_style(ax, fontsize=fontsize, grid=grid)
+    semi_modern_style(ax, fontsize=fontsize-2, grid=grid)
+    axis_labels(ax, plotdata.xaxislabel, plotdata.yaxislabel, fontsize=fontsize)
     r1 = None
     r2 = None
     if plotdata.yr2set==[] and 1<len(plotdata.yset)<6:
