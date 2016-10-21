@@ -83,7 +83,7 @@ def remove_right_top(ax):
     ax.spines["right"].set_visible(False)
 
 
-def modern_style(ax, fontsize=16, grid=True):
+def modern_style(ax, fontsize=16, grid=True, **kwargs):
     """modern style. No boundary and y-grid. ticks on left and bottom
 
     Parameters
@@ -94,7 +94,7 @@ def modern_style(ax, fontsize=16, grid=True):
     """
     remove_boundary(ax)
     ax.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
-                   left="on", right="off", labelleft="on", labelsize=fontsize, width=2.5)
+                   left="on", right="off", labelleft="on", labelsize=fontsize, width=2.5, **kwargs)
     if grid:
         ax.grid(grid, linestyle='--', axis='y', color='0.60')
 
@@ -508,7 +508,7 @@ def add_yerrors(ax, yset=None, errors=None, colors='tb10', elinewidth=1.5):
 
 def label_lines(ax, yset, at_x=None,
                 rotation_on=False,
-                labels=[], offsets=[(0, 0)], colors='tb10', fontsize=18):
+                labels=[], offsets=[(0, 0)], colors='tb10', fontsize=18, **kwargs):
     """Add in graph labels, which are often much better than having a legend. Uses np.interpolate
     together with the yset's to place the label
 
@@ -538,12 +538,14 @@ def label_lines(ax, yset, at_x=None,
         for i, data in enumerate(yset):
             label_line(ax, data[0], data[1], labels[i%len(labels)], colors[i%len(colors)],
                        at_x=at_x[i%len(at_x)],
-                       rotation_on=rotation_on, fontsize=fontsize, offset=offsets[i%len(offsets)])
+                       rotation_on=rotation_on, fontsize=fontsize,
+                       offset=offsets[i%len(offsets)], **kwargs)
     else:
         for i, data in enumerate(yset):
             label_line(ax, data[0], data[1], labels[i%len(labels)], colors[i%len(colors)],
                        at_x=at_x[i%len(at_x)],
-                       rotation_on=rotation_on, fontsize=fontsize, offset=offsets[i%len(offsets)])
+                       rotation_on=rotation_on, fontsize=fontsize,
+                       offset=offsets[i%len(offsets)], **kwargs)
 
 
 def quick_modern(ax, plotdata, scatter=False, rscatter=False, grid=True,
@@ -817,7 +819,8 @@ def label_line(ax, x, y, label_text, color,
                at_x=0,
                rotation_on=False,
                fontsize=14,
-               offset=(0, 0)):
+               offset=(0, 0),
+               **kwargs):
     """This Function allows to put labels onto a line graph. the labesl land on the line by
     by default. The can be set to rotate to be inline with the line. roation_on = True. There
     can also be an ofset. It must also be passed an axis. Typically ax in my code.
@@ -856,5 +859,5 @@ def label_line(ax, x, y, label_text, color,
         dy = np.interp(sat_x+dx, sx, sy)-np.interp(sat_x, sx, sy)
         rotation = 2*np.rad2deg(math.atan2(dy, dx))
     pos = [at_x+offset[0], np.interp(at_x, x, y)+offset[1]]
-    plt.text(pos[0], pos[1], label_text, size=fontsize, rotation=rotation, color=color,
-             ha="center", va="center", bbox=dict(ec='1', fc='1'))
+    ax.text(pos[0], pos[1], label_text, size=fontsize, rotation=rotation, color=color,
+             ha="center", va="center", bbox=dict(ec='1', fc='1'), **kwargs)
