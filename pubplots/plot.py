@@ -786,9 +786,9 @@ def save(name='plot'):
     """
     if not os.path.exists("plots"):
         os.makedirs("plots")
-    plt.savefig(os.path.join('plots', name + '.png'), dpi=90, bbox_inches='tight')
+    plt.savefig(os.path.join('plots', name + '.png'), dpi=150, bbox_inches='tight')
     plt.savefig(os.path.join('plots', name + '.pdf'), dpi=150, bbox_inches='tight')
-
+    plt.tight_layout()
 
 def label_line(ax, x, y, label_text, color,
                at_x=0,
