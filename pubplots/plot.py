@@ -69,7 +69,6 @@ def modern_style(ax, fontsize=16, grid=True, **kwargs):
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_visible(False)
-    remove_boundary(ax)
     ax.tick_params(axis="both", which="both", bottom="on", top="off", labelbottom="on",
                    left="on", right="off", labelleft="on", labelsize=fontsize, width=2.5, **kwargs)
     if grid:
