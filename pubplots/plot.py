@@ -310,7 +310,6 @@ def plot_sright(ax, yset, markersize=8, fillstyle='full', markers=pubmarkers, ya
     """
     ax.set_zorder(1)
     ax.patch.set_visible(False)
-    markers=set_markers(markers)
     axr = ax.twinx()
     axr.set_frame_on(True)
     axr.patch.set_visible(False)
@@ -319,7 +318,7 @@ def plot_sright(ax, yset, markersize=8, fillstyle='full', markers=pubmarkers, ya
     axr.spines["bottom"].set_visible(False)
     axr.spines["right"].set_visible(spine)
     axr.spines["left"].set_visible(False)
-    plot_scatter(axr, yset, linestyle='None', fillstyle=fillstyle, marker=markers,
+    plot_scatter(axr, yset, fillstyle=fillstyle, markers=markers,
                  colors=[color], markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
     axr.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
     for tl in axr.get_yticklabels():
@@ -361,7 +360,6 @@ def plot_sright2(ax , yset, markersize=8, fillstyle='full', markers=pubmarkers, 
     matplotlib.axes object
         returns the new right hand axes
     """
-    markers=set_markers(markers)
     axr2 = ax.twinx()
     axr2.set_frame_on(True)
     axr2.patch.set_visible(False)
@@ -372,7 +370,7 @@ def plot_sright2(ax , yset, markersize=8, fillstyle='full', markers=pubmarkers, 
     axr2.spines["left"].set_visible(False)
     axr2.spines["right"].set_position(("outward", 100))
     #Plot the data
-    plot_scatter(axr2, yset, linestyle='None', fillstyle=fillstyle, marker=markers,
+    plot_scatter(axr2, yset, fillstyle=fillstyle, markers=markers,
                  colors=[color], markersize=markersize, markeredgewidth=markeredgewidth, **kwargs)
     axr2.set_ylabel(yaxlabel, color=color, fontsize=fontsize)
     for tl in axr.get_yticklabels():
@@ -433,8 +431,6 @@ def inset_plot(fig, ax, yset, lbwh=[0.58,0.58,0.40,0.40], grid=False, dashes=Non
         returns the new right hand axes
     """
     colors=set_colors(colors)
-    linestyles=set_linestyles(linestyles)
-    markers=set_markers(markers)
     rect = Rectangle((lbwh[2]+0.07,lbwh[3]+0.04), lbwh[0]-0.03, lbwh[1]-0.03,
                      facecolor='white', edgecolor='black', transform=fig.transFigure,
                      zorder=1)
@@ -790,7 +786,7 @@ def save(name='plot'):
     """
     if not os.path.exists("plots"):
         os.makedirs("plots")
-    plt.savefig(os.path.join('plots', name + '.png'), dpi=150, bbox_inches='tight')
+    plt.savefig(os.path.join('plots', name + '.png'), dpi=90, bbox_inches='tight')
     plt.savefig(os.path.join('plots', name + '.pdf'), dpi=150, bbox_inches='tight')
 
 
