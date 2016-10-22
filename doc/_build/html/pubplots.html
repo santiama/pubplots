@@ -199,7 +199,7 @@ uses prepare frame</p>
 
 <dl class="method">
 <dt id="pubplots.plotdata.PlotData.prepare_frame">
-<code class="descname">prepare_frame</code><span class="sig-paren">(</span><em>dataframe, xcol=0, ycols=[1], labels=[], yrcols=[], yrlabels=[], yr2cols=[], yr2labels=[], xerrors=[], yerrors=[], xaxislabel=None, yaxislabel=None, yraxislabel=None, yr2axislabel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plotdata.PlotData.prepare_frame" title="Permalink to this definition">¶</a></dt>
+<code class="descname">prepare_frame</code><span class="sig-paren">(</span><em>dataframe, sort=True, xcol=0, ycols=[1], labels=[], yrcols=[], yrlabels=[], yr2cols=[], yr2labels=[], xerrors=[], yerrors=[], xaxislabel=None, yaxislabel=None, yraxislabel=None, yr2axislabel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plotdata.PlotData.prepare_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specifiy what data is what in the pandas data. This essentially builds list of
 pointers to access the correct data for plotting</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -210,6 +210,10 @@ pointers to access the correct data for plotting</p>
 <p><strong>xcol</strong> : int, optional</p>
 <blockquote>
 <div><p>position of the xdata collumn</p>
+</div></blockquote>
+<p><strong>sort</strong> : bool, optional</p>
+<blockquote>
+<div><p>sort the DataFrame to make the xcol ascending</p>
 </div></blockquote>
 <p><strong>ycols</strong> : list of integers, optional</p>
 <blockquote>
@@ -320,11 +324,10 @@ up as data.The path can be relative or an absolute path.</p>
 </div>
 <div class="section" id="module-pubplots.plot">
 <span id="pubplots-plot-module"></span><h2>pubplots.plot module<a class="headerlink" href="#module-pubplots.plot" title="Permalink to this headline">¶</a></h2>
-<p>A set of scripts for producing nice plots using matplotlib,
+<p>A set of scripts for quickly producing nice plots using matplotlib,
 Made to be used in combination with the class PlotData, which contains methods
 for selecting the data from csv files and assiging axes labels and data labels.</p>
-<p>Note this is not a wrapper to replace matplolib, it is just a set of scripts
-which take matplotlib axes objects and make nicer plots than the default matplotlib ones.</p>
+<p>Note this is not a wrapper to replace matplolib.</p>
 <dl class="function">
 <dt id="pubplots.plot.add_yerrors">
 <code class="descclassname">pubplots.plot.</code><code class="descname">add_yerrors</code><span class="sig-paren">(</span><em>ax</em>, <em>yset=None</em>, <em>errors=None</em>, <em>colors='tb10'</em>, <em>elinewidth=1.5</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.add_yerrors" title="Permalink to this definition">¶</a></dt>
@@ -381,7 +384,7 @@ x1,y1 are arrays or lists of numbers for plotting</p>
 
 <dl class="function">
 <dt id="pubplots.plot.inset_plot">
-<code class="descclassname">pubplots.plot.</code><code class="descname">inset_plot</code><span class="sig-paren">(</span><em>fig, ax, yset, lbwh=[0.58, 0.58, 0.4, 0.4], grid=False, dashes=None, xlabel=None, ylabel=None, title=None, fontsize=14, colors='tb10', style='modern', scatter=False, label=False, labels=[], at_x=None, linestyles='-', markers='var', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.inset_plot" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">inset_plot</code><span class="sig-paren">(</span><em>fig, ax, yset, lbwh=[0.58, 0.58, 0.4, 0.4], grid=False, dashes=None, xlabel=None, ylabel=None, title=None, fontsize=14, colors='tb10', style='modern', scatter=False, label=False, labels=[], at_x=None, linestyles='-', markers=['o', 's', 'v', 'p', '^', '8', '*', '&gt;', '&lt;', 'x', '+'], **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.inset_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an inset plot positioned in the top right</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -466,7 +469,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.label_line">
-<code class="descclassname">pubplots.plot.</code><code class="descname">label_line</code><span class="sig-paren">(</span><em>ax</em>, <em>x</em>, <em>y</em>, <em>label_text</em>, <em>color</em>, <em>at_x=0</em>, <em>rotation_on=False</em>, <em>fontsize=14</em>, <em>offset=(0</em>, <em>0)</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.label_line" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">label_line</code><span class="sig-paren">(</span><em>ax</em>, <em>x</em>, <em>y</em>, <em>label_text</em>, <em>color</em>, <em>at_x=0</em>, <em>rotation_on=False</em>, <em>fontsize=14</em>, <em>offset=(0</em>, <em>0)</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.label_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>This Function allows to put labels onto a line graph. the labesl land on the line by
 by default. The can be set to rotate to be inline with the line. roation_on = True. There
 can also be an ofset. It must also be passed an axis. Typically ax in my code.</p>
@@ -503,7 +506,7 @@ can also be an ofset. It must also be passed an axis. Typically ax in my code.</
 
 <dl class="function">
 <dt id="pubplots.plot.label_lines">
-<code class="descclassname">pubplots.plot.</code><code class="descname">label_lines</code><span class="sig-paren">(</span><em>ax, yset, at_x=None, rotation_on=False, labels=[], offsets=[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)], colors='tb10', fontsize=18</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.label_lines" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">label_lines</code><span class="sig-paren">(</span><em>ax, yset, at_x=None, rotation_on=False, labels=[], offsets=[(0, 0)], colors='tb10', fontsize=18, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.label_lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add in graph labels, which are often much better than having a legend. Uses np.interpolate
 together with the yset&#8217;s to place the label</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -545,7 +548,7 @@ x1,y1 are arrays or lists of numbers for plotting</p>
 
 <dl class="function">
 <dt id="pubplots.plot.modern_style">
-<code class="descclassname">pubplots.plot.</code><code class="descname">modern_style</code><span class="sig-paren">(</span><em>ax</em>, <em>fontsize=18</em>, <em>grid=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.modern_style" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">modern_style</code><span class="sig-paren">(</span><em>ax</em>, <em>fontsize=16</em>, <em>grid=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.modern_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>modern style. No boundary and y-grid. ticks on left and bottom</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -562,14 +565,15 @@ x1,y1 are arrays or lists of numbers for plotting</p>
 
 <dl class="function">
 <dt id="pubplots.plot.old_hat_style">
-<code class="descclassname">pubplots.plot.</code><code class="descname">old_hat_style</code><span class="sig-paren">(</span><em>ax</em>, <em>fontsize=18</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.old_hat_style" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">old_hat_style</code><span class="sig-paren">(</span><em>ax</em>, <em>fontsize=16</em>, <em>grid=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.old_hat_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Typical graph style. Bounding box. Black lines</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ax</strong> : matplotlib.axes object</p>
-<p class="last"><strong>fontsize</strong> : int, optional</p>
+<p><strong>fontsize</strong> : int, optional</p>
+<p class="last"><strong>grid: bool, default is False</strong></p>
 </td>
 </tr>
 </tbody>
@@ -578,7 +582,7 @@ x1,y1 are arrays or lists of numbers for plotting</p>
 
 <dl class="function">
 <dt id="pubplots.plot.plot_lines">
-<code class="descclassname">pubplots.plot.</code><code class="descname">plot_lines</code><span class="sig-paren">(</span><em>ax</em>, <em>yset</em>, <em>lw=2.0</em>, <em>dashes=None</em>, <em>linestyles='-'</em>, <em>colors='tb10'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_lines" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">plot_lines</code><span class="sig-paren">(</span><em>ax, yset, lw=2.0, dashes=None, linestyles=['-'], colors='tb10', labels=['none'], **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot passed data as lines. Note it uses a ziped set  of lists so the shortest
 list is the maximum number of plots. TB10 just has 10 colors so it will plot a maximum of 10
 lines. For more use &#8216;tb20&#8217;</p>
@@ -621,7 +625,7 @@ can be passed. line.set_dashes from matplotlib</p>
 
 <dl class="function">
 <dt id="pubplots.plot.plot_lright">
-<code class="descclassname">pubplots.plot.</code><code class="descname">plot_lright</code><span class="sig-paren">(</span><em>ax</em>, <em>yset</em>, <em>lw=2.0</em>, <em>yaxlabel='y2'</em>, <em>linestyles='-'</em>, <em>color=(0.12156862745098039</em>, <em>0.4666666666666667</em>, <em>0.7058823529411765)</em>, <em>fontsize=18</em>, <em>spine=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_lright" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">plot_lright</code><span class="sig-paren">(</span><em>ax, yset, lw=2.0, yaxlabel='y2', linestyles=['-'], color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765), fontsize=18, spine=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_lright" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot line to right hand axis. Also colors the right hand labels to of the line and returns
 The right hand axis. By default it is the tableau blue color</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -670,7 +674,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.plot_lright2">
-<code class="descclassname">pubplots.plot.</code><code class="descname">plot_lright2</code><span class="sig-paren">(</span><em>ax</em>, <em>yset</em>, <em>lw=2.0</em>, <em>yaxlabel='None'</em>, <em>color=(0.8392156862745098</em>, <em>0.15294117647058825</em>, <em>0.1568627450980392)</em>, <em>fontsize=18</em>, <em>linestyles='-'</em>, <em>spine=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_lright2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">plot_lright2</code><span class="sig-paren">(</span><em>ax, yset, lw=2.0, yaxlabel='None', color=(0.8392156862745098, 0.15294117647058825, 0.1568627450980392), fontsize=18, linestyles=['-'], spine=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_lright2" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot line to displaced right hand axis and returns the axis.
 Also colors the right hand labels to that if the
 line. By default it is the tableau red color</p>
@@ -720,7 +724,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.plot_scatter">
-<code class="descclassname">pubplots.plot.</code><code class="descname">plot_scatter</code><span class="sig-paren">(</span><em>ax</em>, <em>yset</em>, <em>markersize=10</em>, <em>fillstyle='full'</em>, <em>markers='var'</em>, <em>markeredgewidth=0.0</em>, <em>colors='tb10'</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_scatter" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">plot_scatter</code><span class="sig-paren">(</span><em>ax, yset, markersize=10, fillstyle='full', markers=['o', 's', 'v', 'p', '^', '8', '*', '&gt;', '&lt;', 'x', '+'], markeredgewidth=0.0, labels=['none'], colors='tb10'</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_scatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot passed data as a scatter plot. Note it uses a ziped set of lists so the shortest
 list is the maximum number of plots. For example colors is currently of length ten.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -752,7 +756,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.plot_sright">
-<code class="descclassname">pubplots.plot.</code><code class="descname">plot_sright</code><span class="sig-paren">(</span><em>ax</em>, <em>yset</em>, <em>markersize=8</em>, <em>fillstyle='full'</em>, <em>markers='var'</em>, <em>yaxlabel='y2'</em>, <em>color=(0.12156862745098039</em>, <em>0.4666666666666667</em>, <em>0.7058823529411765)</em>, <em>fontsize=18</em>, <em>markeredgewidth=0.0</em>, <em>spine=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_sright" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">plot_sright</code><span class="sig-paren">(</span><em>ax, yset, markersize=8, fillstyle='full', markers=['o', 's', 'v', 'p', '^', '8', '*', '&gt;', '&lt;', 'x', '+'], yaxlabel='y2', color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765), fontsize=18, markeredgewidth=0.0, spine=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_sright" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot scatter to right hand axis. Also colors the right hand labels to that if the line. By
 default it is the tableau blue color</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -800,7 +804,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.plot_sright2">
-<code class="descclassname">pubplots.plot.</code><code class="descname">plot_sright2</code><span class="sig-paren">(</span><em>ax</em>, <em>yset</em>, <em>markersize=8</em>, <em>fillstyle='full'</em>, <em>markers='var'</em>, <em>yaxlabel='y3'</em>, <em>color=(0.8392156862745098</em>, <em>0.15294117647058825</em>, <em>0.1568627450980392)</em>, <em>fontsize=18</em>, <em>markeredgewidth=0.0</em>, <em>spine=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_sright2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">plot_sright2</code><span class="sig-paren">(</span><em>ax, yset, markersize=8, fillstyle='full', markers=['o', 's', 'v', 'p', '^', '8', '*', '&gt;', '&lt;', 'x', '+'], yaxlabel='y3', color=(0.8392156862745098, 0.15294117647058825, 0.1568627450980392), fontsize=18, markeredgewidth=0.0, spine=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.plot_sright2" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot scatter to right hand axis. Also colors the right hand labels to that if the line. By
 default it is the tableau blue color</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -848,7 +852,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.quick_modern">
-<code class="descclassname">pubplots.plot.</code><code class="descname">quick_modern</code><span class="sig-paren">(</span><em>ax</em>, <em>plotdata</em>, <em>figsize=(9</em>, <em>6)</em>, <em>scatter=False</em>, <em>rscatter=False</em>, <em>grid=True</em>, <em>r2scatter=False</em>, <em>at_x=None</em>, <em>label=True</em>, <em>fontsize=18</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.quick_modern" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">quick_modern</code><span class="sig-paren">(</span><em>ax</em>, <em>plotdata</em>, <em>scatter=False</em>, <em>rscatter=False</em>, <em>grid=True</em>, <em>r2scatter=False</em>, <em>at_x=None</em>, <em>label=True</em>, <em>fontsize=18</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.quick_modern" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a modern style plot from a PlotData object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -858,10 +862,6 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 <p><strong>plotdata</strong> : PlotData object see plotdata from pubplots.</p>
 <blockquote>
 <div><p>Holds the information of what data to plot and axislabels line labels etc.</p>
-</div></blockquote>
-<p><strong>figsize</strong> : tuple, optional</p>
-<blockquote>
-<div><p>(9,6) is the default</p>
 </div></blockquote>
 <p><strong>scatter</strong> : bool, optional</p>
 <blockquote>
@@ -902,7 +902,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.quick_old_hat">
-<code class="descclassname">pubplots.plot.</code><code class="descname">quick_old_hat</code><span class="sig-paren">(</span><em>ax</em>, <em>plotdata</em>, <em>figsize=(9</em>, <em>6)</em>, <em>scatter=False</em>, <em>rscatter=False</em>, <em>r2scatter=False</em>, <em>at_x=None</em>, <em>label=True</em>, <em>fontsize=18</em>, <em>dashes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.quick_old_hat" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">quick_old_hat</code><span class="sig-paren">(</span><em>ax</em>, <em>plotdata</em>, <em>scatter=False</em>, <em>rscatter=False</em>, <em>r2scatter=False</em>, <em>at_x=None</em>, <em>label=True</em>, <em>fontsize=18</em>, <em>dashes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.quick_old_hat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a modern style plot from a PlotData object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -912,10 +912,6 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 <p><strong>plotdata</strong> : PlotData object see plotdata from pubplots.</p>
 <blockquote>
 <div><p>Holds the information of what data to plot and axislabels line labels etc.</p>
-</div></blockquote>
-<p><strong>figsize</strong> : tuple, optional</p>
-<blockquote>
-<div><p>(9,6) is the default</p>
 </div></blockquote>
 <p><strong>scatter</strong> : bool, optional</p>
 <blockquote>
@@ -960,7 +956,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.quick_semimodern">
-<code class="descclassname">pubplots.plot.</code><code class="descname">quick_semimodern</code><span class="sig-paren">(</span><em>ax</em>, <em>plotdata</em>, <em>figsize=(9</em>, <em>6)</em>, <em>scatter=False</em>, <em>rscatter=False</em>, <em>grid=True</em>, <em>r2scatter=False</em>, <em>at_x=None</em>, <em>label=True</em>, <em>fontsize=18</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.quick_semimodern" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">quick_semimodern</code><span class="sig-paren">(</span><em>ax</em>, <em>plotdata</em>, <em>scatter=False</em>, <em>rscatter=False</em>, <em>grid=True</em>, <em>r2scatter=False</em>, <em>at_x=None</em>, <em>label=True</em>, <em>fontsize=18</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.quick_semimodern" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a modern style plot from a PlotData object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -970,10 +966,6 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 <p><strong>plotdata</strong> : PlotData object see plotdata from pubplots.</p>
 <blockquote>
 <div><p>Holds the information of what data to plot and axislabels line labels etc.</p>
-</div></blockquote>
-<p><strong>figsize</strong> : tuple, optional</p>
-<blockquote>
-<div><p>(9,6) is the default</p>
 </div></blockquote>
 <p><strong>scatter</strong> : bool, optional</p>
 <blockquote>
@@ -1013,42 +1005,6 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pubplots.plot.remove_boundary">
-<code class="descclassname">pubplots.plot.</code><code class="descname">remove_boundary</code><span class="sig-paren">(</span><em>ax</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.remove_boundary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove the spines. Common in modern presentation graphs</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ax</strong> : matplotlib.axes object</p>
-<blockquote class="last">
-<div><p>the axes to to have the spines remoced</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="pubplots.plot.remove_right_top">
-<code class="descclassname">pubplots.plot.</code><code class="descname">remove_right_top</code><span class="sig-paren">(</span><em>ax</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.remove_right_top" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove top and right boundaries</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ax</strong> : matplotlib.axes object</p>
-<blockquote class="last">
-<div><p>the axes to to have the spines remoced</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="pubplots.plot.save">
 <code class="descclassname">pubplots.plot.</code><code class="descname">save</code><span class="sig-paren">(</span><em>name='plot'</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>save as png and pdf</p>
@@ -1068,7 +1024,7 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 
 <dl class="function">
 <dt id="pubplots.plot.semi_modern_style">
-<code class="descclassname">pubplots.plot.</code><code class="descname">semi_modern_style</code><span class="sig-paren">(</span><em>ax</em>, <em>fontsize=18</em>, <em>grid=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.semi_modern_style" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pubplots.plot.</code><code class="descname">semi_modern_style</code><span class="sig-paren">(</span><em>ax</em>, <em>fontsize=16</em>, <em>grid=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.semi_modern_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bottom and left boundarys. y-grid nicetableau colors</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1100,54 +1056,6 @@ x1,y1 are arrays or pointers to arrays/lists of numbers</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of tupples</p>
 <blockquote class="last">
 <div><p>A list of (r,g,b) tuples</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="pubplots.plot.set_linestyles">
-<code class="descclassname">pubplots.plot.</code><code class="descname">set_linestyles</code><span class="sig-paren">(</span><em>linestyles</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.set_linestyles" title="Permalink to this definition">¶</a></dt>
-<dd><p>return a list of linestyles or unchanged list if a list is passed</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>linestyles</strong> : str or list</p>
-<blockquote>
-<div><p>options &#8216;-&#8216; or &#8216;&#8211;&#8217;, &#8216;..&#8217; or, &#8216;.-&#8216; or a list with variations of these</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list</p>
-<blockquote class="last">
-<div><p>passed list or makes a list from &#8216;-&#8216;</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="pubplots.plot.set_markers">
-<code class="descclassname">pubplots.plot.</code><code class="descname">set_markers</code><span class="sig-paren">(</span><em>markers</em><span class="sig-paren">)</span><a class="headerlink" href="#pubplots.plot.set_markers" title="Permalink to this definition">¶</a></dt>
-<dd><p>return a list of markers if a str key is passed</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>markers</strong> : str or list</p>
-<blockquote>
-<div><p>&#8216;var&#8217; gives a list of varying markers</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list</p>
-<blockquote class="last">
-<div><p>list of markers</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1195,7 +1103,7 @@ pubmarkers : dictionary of marker lists</p>
 <h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="three-y-axis">
 <h2>1 three y axis<a class="headerlink" href="#three-y-axis" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
 <span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
 
@@ -1221,82 +1129,38 @@ pubmarkers : dictionary of marker lists</p>
 </div>
 <a class="reference internal image-reference" href="_images/1_TGA_data_vs_time.png"><img alt="_images/1_TGA_data_vs_time.png" src="_images/1_TGA_data_vs_time.png" style="width: 700pt;" /></a>
 </div>
-<div class="section" id="markers">
-<h2>2 markers<a class="headerlink" href="#markers" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="section" id="linear-fits">
+<h2>2 linear fits<a class="headerlink" href="#linear-fits" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
 <span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
 
-<span class="c1"># A plot of some reaction rate data of mine for the re-oxidation of Ce1-xZrxO(2-d)</span>
-<span class="c1"># These files are delimted by tabs so that needs to be specified using sep=&#39;\t&#39;</span>
+<span class="n">fit1</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
+<span class="c1"># Use the walk and find method to find the fit data</span>
+<span class="n">fit1</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="n">startpath</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">=</span><span class="s1">&#39;fit&#39;</span><span class="p">,</span>
+                 <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x=0&#39;</span><span class="p">,</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3&#39;</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="c1"># Load kinetic data</span>
-<span class="n">pco</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
-<span class="n">pco</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="n">startpath</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">=</span><span class="s1">&#39;PC_&#39;</span><span class="p">,</span> <span class="n">xaxislabel</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span>
-                <span class="n">yaxislabel</span><span class="o">=</span><span class="s1">&#39;Fraction complete&#39;</span><span class="p">,</span> <span class="n">yraxislabel</span><span class="o">=</span><span class="s1">&#39;Temperature [$^</span><span class="se">\\</span><span class="s1">circ$C]&#39;</span><span class="p">,</span>
-                <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x = 0&#39;</span><span class="p">,</span> <span class="s1">&#39;0.05&#39;</span><span class="p">,</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3 &#39;</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1"># fit scatered data with np.polyfit, deg is by default 1, prints fit paramaters and errors</span>
+<span class="n">fit1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Load temperature data for the right hand axis</span>
-<span class="n">rlabel</span> <span class="o">=</span> <span class="s1">&#39;T$_{\mathrm</span><span class="si">{max}</span><span class="s1">}$ $ </span><span class="se">\\</span><span class="s1">approx$ 860 $^{\circ}$C $</span><span class="se">\\</span><span class="s1">rightarrow$&#39;</span>
-<span class="n">pco</span><span class="o">.</span><span class="n">onefile</span><span class="p">(</span><span class="s1">&#39;data/t_T_ox.txt&#39;</span><span class="p">,</span> <span class="n">ycols</span><span class="o">=</span><span class="p">[],</span> <span class="n">yrcols</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-            <span class="n">yrlabels</span><span class="o">=</span><span class="p">[</span><span class="n">rlabel</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="c1"># In this case the pbt.quick_modern() method sees that there is only one data set for the</span>
-<span class="c1"># right axes and colors it grey, and then uses colors for the left axes</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="c1"># Here we use the individual commands rather than the quick plot method</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">axr</span> <span class="o">=</span> <span class="n">pbt</span><span class="o">.</span><span class="n">quick_modern</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">pco</span><span class="p">,</span> <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">160</span><span class="p">],</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">240</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;2_scatter&#39;</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">modern_style</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">axis_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;10$^{3}$/RT&#39;</span><span class="p">,</span> <span class="s1">&#39;ln(k)&#39;</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">plot_scatter</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fit1</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span> <span class="n">fillstyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">plot_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fit1</span><span class="o">.</span><span class="n">fits</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">label_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fit1</span><span class="o">.</span><span class="n">fits</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">fit1</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">,</span> <span class="mf">0.157</span><span class="p">,</span> <span class="mf">0.133</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;2_fitscatter&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/2_scatter.png"><img alt="_images/2_scatter.png" src="_images/2_scatter.png" style="width: 400pt;" /></a>
-</div>
-<div class="section" id="double-y-axis-no-grid-and-grid">
-<h2>3 double y axis no grid and grid<a class="headerlink" href="#double-y-axis-no-grid-and-grid" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
-<span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
-
-<span class="c1"># This file shows a plot with a scatter to the right hand axes</span>
-
-
-<span class="n">reddata</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
-<span class="n">reddata</span><span class="o">.</span><span class="n">onefile</span><span class="p">(</span><span class="s1">&#39;data/reduction.txt&#39;</span><span class="p">,</span> <span class="n">xcol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ycols</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">yrcols</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                <span class="n">xaxislabel</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span> <span class="n">yaxislabel</span><span class="o">=</span><span class="s1">&#39;Temperature [$^\circ$C]&#39;</span><span class="p">,</span>
-                <span class="n">yraxislabel</span><span class="o">=</span><span class="s1">&#39;Pressure [Pa]&#39;</span><span class="p">)</span>
-
-<span class="c1"># Supose we want lines plotted to the left and markers to the right</span>
-<span class="c1"># And no grid</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">axr</span> <span class="o">=</span> <span class="n">pbt</span><span class="o">.</span><span class="n">quick_modern</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">reddata</span><span class="p">,</span> <span class="n">rscatter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">55</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;3_reduction&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Plot 2</span>
-<span class="n">oxdata</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
-<span class="n">oxdata</span><span class="o">.</span><span class="n">onefile</span><span class="p">(</span><span class="s1">&#39;data/oxidation.txt&#39;</span><span class="p">,</span> <span class="n">xcol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ycols</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">yrcols</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xaxislabel</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span>
-               <span class="n">yaxislabel</span><span class="o">=</span><span class="s1">&#39;Temperature [$^\circ$C]&#39;</span><span class="p">,</span> <span class="n">yraxislabel</span><span class="o">=</span><span class="s1">&#39;Pressure [Pa]&#39;</span><span class="p">)</span>
-
-<span class="c1"># Make an old style graph</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">axr</span> <span class="o">=</span> <span class="n">pbt</span><span class="o">.</span><span class="n">quick_modern</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">oxdata</span><span class="p">,</span> <span class="n">rscatter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">155</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;3_oxidation&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/3_reduction.png"><img alt="_images/3_reduction.png" src="_images/3_reduction.png" style="width: 400pt;" /></a>
-<a class="reference internal image-reference" href="_images/3_oxidation.png"><img alt="_images/3_oxidation.png" src="_images/3_oxidation.png" style="width: 400pt;" /></a>
+<a class="reference internal image-reference" href="_images/2_fitscatter.png"><img alt="_images/2_fitscatter.png" src="_images/2_fitscatter.png" style="width: 400pt;" /></a>
 </div>
 <div class="section" id="inset">
-<h2>4 inset<a class="headerlink" href="#inset" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<h2>3 Inset<a class="headerlink" href="#inset" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
 <span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
 
@@ -1325,40 +1189,11 @@ pubmarkers : dictionary of marker lists</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/4_inset_kinetics.png"><img alt="_images/4_inset_kinetics.png" src="_images/4_inset_kinetics.png" style="width: 400pt;" /></a>
-</div>
-<div class="section" id="scatter-fits">
-<h2>5 scatter fits<a class="headerlink" href="#scatter-fits" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
-<span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
-
-<span class="n">fit1</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
-<span class="c1"># Use the walk and find method to find the fit data</span>
-<span class="n">fit1</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="n">startpath</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">=</span><span class="s1">&#39;fit&#39;</span><span class="p">,</span>
-                 <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x=0&#39;</span><span class="p">,</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3&#39;</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-
-<span class="c1"># fit scatered data with np.polyfit, deg is by default 1 - a line</span>
-<span class="n">fit1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Here we use the individual commands rather than the quick plot method</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">modern_style</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">axis_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;10$^</span><span class="si">{3}</span><span class="s1">$/RT&#39;</span><span class="p">,</span> <span class="s1">&#39;ln(k)&#39;</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">plot_scatter</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fit1</span><span class="o">.</span><span class="n">yset</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">plot_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fit1</span><span class="o">.</span><span class="n">fits</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">label_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fit1</span><span class="o">.</span><span class="n">fits</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">fit1</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">,</span> <span class="mf">0.157</span><span class="p">,</span> <span class="mf">0.133</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;5_fitscatter&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/5_fitscatter.png"><img alt="_images/5_fitscatter.png" src="_images/5_fitscatter.png" style="width: 400pt;" /></a>
+<a class="reference internal image-reference" href="_images/3_inset_kinetics.png"><img alt="_images/3_inset_kinetics.png" src="_images/3_inset_kinetics.png" style="width: 400pt;" /></a>
 </div>
 <div class="section" id="old-hat-style">
-<h2>6 old hat style<a class="headerlink" href="#old-hat-style" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<h2>4 old hat style<a class="headerlink" href="#old-hat-style" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
 <span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
 
@@ -1377,34 +1212,101 @@ pubmarkers : dictionary of marker lists</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/6_old_hat_thermolysis.png"><img alt="_images/6_old_hat_thermolysis.png" src="_images/6_old_hat_thermolysis.png" style="width: 400pt;" /></a>
+<a class="reference internal image-reference" href="_images/4_old_hat_thermolysis.png"><img alt="_images/4_old_hat_thermolysis.png" src="_images/4_old_hat_thermolysis.png" style="width: 400pt;" /></a>
 </div>
 <div class="section" id="rotated-labels">
-<h2>7 rotated labels<a class="headerlink" href="#rotated-labels" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">plotdata</span> <span class="k">import</span> <span class="n">PlotData</span>
-<span class="kn">import</span> <span class="nn">plot</span> <span class="k">as</span> <span class="nn">pbt</span>
+<h2>5 Rotated labels<a class="headerlink" href="#rotated-labels" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
+<span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
+
+<span class="c1"># plot the change in gibbs free energy for reduction with rotated labels</span>
 
 <span class="n">dg</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
-<span class="n">dg</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s1">&#39;Delta&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;$p_\mathrm</span><span class="si">{O_2}</span><span class="s1">=0.001$ [bar]&#39;</span><span class="p">,</span> <span class="s1">&#39;1 bar&#39;</span><span class="p">,</span> <span class="s1">&#39;6 bar&#39;</span><span class="p">])</span>
+<span class="n">dg</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s1">&#39;Delta&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;$p_\mathrm{O_2}=0.001$ [bar]&#39;</span><span class="p">,</span> <span class="s1">&#39;1 bar&#39;</span><span class="p">,</span> <span class="s1">&#39;6 bar&#39;</span><span class="p">])</span>
 
 
-<span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">axis_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">,</span> <span class="s1">&#39;$\Delta G$ [kJ mol$^{-1}$]&#39;</span><span class="p">)</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">old_hat_style</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">axis_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;Temperature [K]&#39;</span><span class="p">,</span> <span class="s1">&#39;$\Delta G$ [kJ mol$^{-1}$]&#39;</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">semi_modern_style</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">pbt</span><span class="o">.</span><span class="n">plot_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">dg</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mi">1010</span><span class="p">,</span><span class="mi">1390</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mi">1010</span><span class="p">,</span> <span class="mi">1390</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="mi">45</span><span class="p">))</span>
-<span class="c1">#rotate the labels to the lines</span>
-<span class="n">pbt</span><span class="o">.</span><span class="n">label_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">dg</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span> <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mi">1200</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">1200</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">dg</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation_on</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="c1"># rotate the labels to the lines</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">label_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">dg</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span> <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">dg</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
+                <span class="n">rotation_on</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;7_rotatedlabels&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/7_rotatedlabels.png"><img alt="_images/7_rotatedlabels.png" src="_images/7_rotatedlabels.png" style="width: 400pt;" /></a>
+<a class="reference internal image-reference" href="_images/5_rotatedlabels.png"><img alt="_images/5_rotatedlabels.png" src="_images/5_rotatedlabels.png" style="width: 400pt;" /></a>
+</div>
+<div class="section" id="markers">
+<h2>6 Markers<a class="headerlink" href="#markers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
+<span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
+
+<span class="c1"># A plot of some reaction rate data of mine for the re-oxidation of Ce1-xZrxO(2-d)</span>
+<span class="c1"># These files are delimted by tabs so that needs to be specified using sep=&#39;\t&#39;</span>
+
+<span class="c1"># Load kinetic data</span>
+<span class="n">pco</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
+<span class="n">pco</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="n">startpath</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">=</span><span class="s1">&#39;PC_&#39;</span><span class="p">,</span> <span class="n">xaxislabel</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span>
+                <span class="n">yaxislabel</span><span class="o">=</span><span class="s1">&#39;Fraction complete&#39;</span><span class="p">,</span> <span class="n">yraxislabel</span><span class="o">=</span><span class="s1">&#39;Temperature [$^</span><span class="se">\\</span><span class="s1">circ$C]&#39;</span><span class="p">,</span>
+                <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x = 0&#39;</span><span class="p">,</span> <span class="s1">&#39;0.05&#39;</span><span class="p">,</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;0.2&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3 &#39;</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load temperature data for the right hand axis</span>
+<span class="n">rlabel</span> <span class="o">=</span> <span class="s1">&#39;T$_{\mathrm{max}}$ $ </span><span class="se">\\</span><span class="s1">approx$ 860 $^{\circ}$C $</span><span class="se">\\</span><span class="s1">rightarrow$&#39;</span>
+<span class="n">pco</span><span class="o">.</span><span class="n">onefile</span><span class="p">(</span><span class="s1">&#39;data/t_T_ox.txt&#39;</span><span class="p">,</span> <span class="n">ycols</span><span class="o">=</span><span class="p">[],</span> <span class="n">yrcols</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">yrlabels</span><span class="o">=</span><span class="p">[</span><span class="n">rlabel</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># In this case the pbt.quick_modern() method sees that there is only one data set for the</span>
+<span class="c1"># right axes and colors it grey, and then uses colors for the left axes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">axr</span> <span class="o">=</span> <span class="n">pbt</span><span class="o">.</span><span class="n">quick_modern</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">pco</span><span class="p">,</span> <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">160</span><span class="p">],</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">240</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;2_scatter&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/6_scatter.png"><img alt="_images/6_scatter.png" src="_images/6_scatter.png" style="width: 400pt;" /></a>
+</div>
+<div class="section" id="with-xkcd">
+<h2>7 With xkcd<a class="headerlink" href="#with-xkcd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">pubplots</span> <span class="k">import</span> <span class="n">PlotData</span>
+<span class="kn">import</span> <span class="nn">pubplots.plot</span> <span class="k">as</span> <span class="nn">pbt</span>
+
+<span class="n">cont</span> <span class="o">=</span> <span class="n">PlotData</span><span class="p">()</span>
+<span class="n">cont</span><span class="o">.</span><span class="n">walkandfind</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">=</span><span class="s1">&#39;.xkcd&#39;</span><span class="p">,</span> <span class="n">xcol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ycols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="n">xaxislabel</span><span class="o">=</span><span class="s1">&#39;Pressure [Bar]&#39;</span><span class="p">,</span> <span class="n">yaxislabel</span><span class="o">=</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xkcd</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">facecolor</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">modern_style</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">axis_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;Pressure [bar]&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature [K]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">plot_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cont</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="s1">&#39;tb20&#39;</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">plot_scatter</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cont</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;tb20&#39;</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">label_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cont</span><span class="o">.</span><span class="n">yset</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">cont</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;tb20&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+                <span class="n">at_x</span><span class="o">=</span><span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+                      <span class="mi">90</span><span class="p">,</span> <span class="mi">7</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span> <span class="mi">8</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span>
+                <span class="n">fontname</span><span class="o">=</span><span class="s1">&#39;StayPuft&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">2</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="n">e2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">pbt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;8_with_xkcdmode&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/8_with_xkcdmode.png"><img alt="_images/8_with_xkcdmode.png" src="_images/8_with_xkcdmode.png" style="width: 400pt;" /></a>
 </div>
 </div>
 
@@ -1430,12 +1332,12 @@ pubmarkers : dictionary of marker lists</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#three-y-axis">1 three y axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#markers">2 markers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#double-y-axis-no-grid-and-grid">3 double y axis no grid and grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#inset">4 inset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scatter-fits">5 scatter fits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#old-hat-style">6 old hat style</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rotated-labels">7 rotated labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-fits">2 linear fits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inset">3 Inset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#old-hat-style">4 old hat style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rotated-labels">5 Rotated labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#markers">6 Markers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#with-xkcd">7 With xkcd</a></li>
 </ul>
 </li>
 </ul>

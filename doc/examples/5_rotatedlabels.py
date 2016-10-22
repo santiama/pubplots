@@ -11,7 +11,7 @@ dg.walkandfind(search='Delta', labels=['$p_\mathrm{O_2}=0.001$ [bar]', '1 bar', 
 fig = plt.figure(figsize=(8, 6))
 ax = plt.subplot(111)
 pbt.axis_labels(ax, 'Temperature [K]', '$\Delta G$ [kJ mol$^{-1}$]')
-pbt.old_hat_style(ax)
+pbt.semi_modern_style(ax, grid=False)
 pbt.plot_lines(ax, dg.yset, colors='black')
 ax.set_xlim((1010, 1390))
 ax.set_ylim((-60, 45))
