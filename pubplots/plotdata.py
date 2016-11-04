@@ -86,7 +86,11 @@ class PlotData(object):
             Description
         """
         if sort:
-            dataframe.sort_values(by=dataframe.iloc[:,xcol].name, inplace=True)
+            try:
+                dataframe.sort_values(by=dataframe.iloc[:,xcol].name, inplace=True)
+            except AttributeError:
+                #older version of pandas
+                dataframe.sort(dataframe.iloc[:,xcol].name, inplace=True)
         self.frames.append(dataframe)
         # make pointers to the data in the yset, yrset lists
         for ycol in ycols:
