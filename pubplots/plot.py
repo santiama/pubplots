@@ -173,7 +173,7 @@ def plot_scatter(ax, yset,  markersize=10, fillstyle='full',
         # PLot the data
         a,=ax.plot(data[0], data[1], linestyle='none', marker=markers[i%len(markers)],
             fillstyle=fillstyle, color=colors[i%len(colors)], markersize=markersize,
-            markeredgewidth=markeredgewidth)
+            label=labels[i%len(labels)], markeredgewidth=markeredgewidth)
         scatters.append(a)
     return scatters
 
